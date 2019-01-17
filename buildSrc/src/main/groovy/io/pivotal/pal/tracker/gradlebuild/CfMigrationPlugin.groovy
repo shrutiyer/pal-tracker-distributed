@@ -23,7 +23,8 @@ class CfMigrationPlugin implements Plugin<Project> {
                     doLast {
                         println "Opening Tunnel for $appName"
                         Thread.start {
-                            tunnelProcess = "cf ssh -N -L 63306:${getMysqlHost(appName, databaseInstanceName)}:3306 $appName".execute()
+                            "cf ssh $appName".execute()
+                            tunnelProcess = "cf ssh -L 63306:${getMysqlHost(appName, databaseInstanceName)}:3306 $appName".execute()
                         }
                         sleep 50_000L
                     }
@@ -57,7 +58,7 @@ class CfMigrationPlugin implements Plugin<Project> {
 
     private static def buildFlywayExtension(Project project, String cfAppName, databaseInstanceName) {
         def extension = new FlywayExtension()
-
+        println "FlywayMigrate for $cfAppName and $databaseInstanceName"
         getMysqlCredentials(cfAppName, databaseInstanceName)?.with { credentials ->
 
             extension.user = credentials["username"]
