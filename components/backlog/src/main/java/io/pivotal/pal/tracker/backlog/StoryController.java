@@ -24,6 +24,10 @@ public class StoryController {
         this.client = client;
     }
 
+    @PostMapping
+    public ResponseEntity<StoryInfo> create() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<StoryInfo> create(@RequestBody StoryForm form) {
