@@ -89,4 +89,4 @@ jobs:
         - sudo apt-get install cf-cli
       script:
         - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
-        - ./gradlew cfMigrate
+        - ./gradlew cfMigrate --stacktrace
